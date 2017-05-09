@@ -1,7 +1,10 @@
+import './scss/app.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './components/app';
+
 ReactDOM.render(
-  <div>Todo App with Mobx and React</div>,
+  <App />,
   document.getElementById('app')
 );

@@ -2,6 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 
 import Todo from '../todo';
+import TodoList from './todoList/todoList';
+import ProgressBar from './progressBar/progressBar';
 
 class App extends React.Component {
 
@@ -57,15 +59,11 @@ class App extends React.Component {
         console.log(this.state);
 
         const percentage = this.state.todos.filter(t => t.isDone).length / (this.state.todos.length || 1);
-        const progressStyle = {width: (200 * percentage) + 'px'};
 
         return <div className='app'>
             <h1 className='title'>My (Mobx) Todo App</h1>
 
-            <div className="progress-bar">
-                <div className='meter' style={progressStyle}></div>
-                <div className='label'>{percentage === 1 ? 'You are done!' : 'Progress'}</div>
-            </div>
+            <ProgressBar percentage={percentage} />
 
             <div>
                 <span>Add</span>
@@ -73,11 +71,7 @@ class App extends React.Component {
                 <button onClick={(e) => this.addTodoByClick(e)}>Add</button>
             </div>
 
-            <div>
-                <ul>
-                    {this.state.todos.map(t => <li key={t.id}><input onClick={this.toggleDone.bind(this, t.id)} type="checkbox" checked={t.isDone} />{t.text}</li>)}
-                </ul>
-            </div>
+            <TodoList todos={this.state.todos} toggleDone={this.toggleDone.bind(this)} />
 
             <div>
                 <a href="#" onClick={this.clearAllDones.bind(this)}>Clear all "Done"s</a>

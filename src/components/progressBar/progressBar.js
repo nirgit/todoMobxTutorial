@@ -1,6 +1,9 @@
 import React from 'react';
 
+import { observer } from 'mobx-react';
+
 const ProgressBar = ({percentage}) => {
+    console.log('rendering ProgressBar');
     const progressStyle = {width: 100 * percentage + '%'};
 
     return <div className="progress-bar">
@@ -9,4 +12,4 @@ const ProgressBar = ({percentage}) => {
     </div>;
 };
 
-export default ProgressBar;
+export default observer(ProgressBar);

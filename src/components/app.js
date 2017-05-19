@@ -31,18 +31,18 @@ class App extends React.Component {
         }
     }
 
-    toggleDone(todoId) {
+    toggleDone = (todoId) => {
       const todoIndex = _.findIndex(this.props.todos, {'id': todoId});
       // DIRECT ACCESS TO TODOS OBJECTS IN ARRAY
       this.props.todos[todoIndex].isDone = !this.props.todos[todoIndex].isDone;
-    }
+    };
 
-    clearAllDones() {
+    clearAllDones = () => {
         const unFinishedTodos = this.props.todos.filter(t => !t.isDone);
         // WE CAN'T REPLACE THE ENTIRE TODOS WITH A NEW REFERENCE, BUT WE CAN EMPTY IT AND PUSH ALL THE REST
         this.props.todos.clear();
         this.props.todos.push(...unFinishedTodos);
-    }
+    };
 
     render() {
         console.log('rendering App');
@@ -61,10 +61,10 @@ class App extends React.Component {
                 <button onClick={(e) => this.addTodoByClick(e)}>Add</button>
             </div>
 
-            <TodoList todos={this.props.todos} toggleDone={this.toggleDone.bind(this)} />
+            <TodoList todos={this.props.todos} toggleDone={this.toggleDone} />
 
             <div>
-                <a href="#" onClick={this.clearAllDones.bind(this)}>Clear all "Done"s</a>
+                <a href="#" onClick={this.clearAllDones}>Clear all "Done"s</a>
             </div>
         </div>;
     }
